@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palanivelu | Student Portfolio</title>
+    <!-- Seo Tags -->
+    <meta name="description" content="Professional portfolio of Palanivelu, an aspiring Full Stack Developer. Showcase of education, skills, projects, certifications, and experience.">
+    <meta name="keywords" content="Palanivelu, Web Developer, Full Stack Developer, Student Portfolio, Resume, GitHub, HTML, CSS, JavaScript">
+    
+    <!-- Google Font (Heebo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Left Accent Border (Design Inspiration) -->
+    <div class="side-accent-border"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar-header" id="navbar">
+        <nav class="nav-container">
+            <a href="#home" class="nav-logo">RK<span>.</span></a>
+            
+            <ul class="nav-menu" id="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#certifications" class="nav-link">Certificates</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger-btn" aria-label="Toggle Navigation Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-container container">
+            <div class="hero-content fade-in-element">
+                <span class="hero-greeting">Hi, I am</span>
+                <h1 class="hero-name">Palanivelu</h1>
+                <h2 class="hero-title"><span id="typing-text"></span><span class="cursor">&nbsp;</span></h2>
+                <p class="hero-description text-muted">
+                    An enthusiastic developer building robust layouts and database-driven dynamic web systems.
+                    Eager to contribute code to innovative projects and collaborate with high-performance teams.
+                </p>
+                <div class="hero-buttons">
+                    <a href="images/resume.pdf" class="btn btn-primary" download="Palanivelu_Resume.pdf">
+                        <i class="fa-solid fa-download"></i> Download Resume
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fa-solid fa-paper-plane"></i> Contact Me
+                    </a>
+                </div>
+                <div class="hero-socials">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:rahulkumar@example.com" aria-label="Send Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper fade-in-element">
+                <img src="images/profile.jpg" alt="Rahul Kumar Profile Photo" class="hero-profile-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section scroll-reveal" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-content">
+                    <p class="paragraph">
+                        I am an enthusiastic and detail-oriented student pursuing a Career in Web Development. Currently focusing on building responsive and modern web projects, I combine HTML, CSS, JavaScript, and backend tools to create complete digital solutions. My passion for technology drives me to explore new frameworks and software methodologies, and I enjoy solving complex problems through clean, efficient code.
+                    </p>
+                    <p class="paragraph">
+                        Beyond coding, my interests lie in system design and data architecture. I hold a strong foundation in database management systems and cloud services. My strengths include rapid adaptability to new tech stacks, strong analytical thinking, and a collaborative mindset when working in team structures. I am committed to continuous learning and leveraging my developer skill set to build meaningful applications that solve real-world challenges.
+                    </p>
+                    <div class="about-details">
+                        <div class="detail-item"><i class="fa-solid fa-location-dot"></i> <span>Chennai, India</span></div>
+                        <div class="detail-item"><i class="fa-solid fa-graduation-cap"></i> <span>Computer Science Student</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section highlight-section scroll-reveal" id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="timeline">
+                <!-- Timeline item 1 (College) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2023 - Present</span>
+                        <h3 class="timeline-degree">Bachelor of Computer Applications (BCA)</h3>
+                        <h4 class="timeline-institution">Madras Christian College</h4>
+                        <p class="timeline-details">University: Madras University</p>
+                        <div class="timeline-badge">CGPA: 8.6 / 10.0</div>
+                    </div>
+                </div>
+                
+                <!-- Timeline item 2 (HSC) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2021 - 2023</span>
+                        <h3 class="timeline-degree">Higher Secondary Certificate (HSC)</h3>
+                        <h4 class="timeline-institution">St. John's Higher Secondary School</h4>
+                        <p class="timeline-details">Board: State Board (Computer Science group)</p>
+                        <div class="timeline-badge">Percentage: 92%</div>
+                    </div>
+                </div>
+                
+                <!-- Timeline item 3 (SSLC) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2020 - 2021</span>
+                        <h3 class="timeline-degree">Secondary School Leaving Certificate (SSLC)</h3>
+                        <h4 class="timeline-institution">St. John's Secondary School</h4>
+                        <p class="timeline-details">Board: State Board</p>
+                        <div class="timeline-badge">Percentage: 95%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section scroll-reveal" id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            
+            <div class="skills-grid">
+                <!-- Skill Category 1 -->
+                <div class="skill-category-card">
+                    <h3 class="category-title"><i class="fa-solid fa-code text-primary"></i> Frontend</h3>
+                    <div class="skill-list" id="frontend-skills">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>HTML5</span>
+                                <span class="skill-percentage">95%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>CSS3</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>JavaScript</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Category 2 -->
+                <div class="skill-category-card">
+                    <h3 class="category-title"><i class="fa-solid fa-gears text-primary"></i> Backend & Database</h3>
+                    <div class="skill-list" id="backend-skills">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Python</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Flask</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>MongoDB</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 3 -->
+                <div class="skill-category-card">
+                    <h3 class="category-title"><i class="fa-solid fa-wrench text-primary"></i> Dev Tools</h3>
+                    <div class="skill-list" id="tools-skills">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Git & GitHub</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>VS Code</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" data-progress="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section highlight-section scroll-reveal" id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="images/project1.jpg" alt="Student Attendance System Dashboard Preview" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">Student Attendance System</h3>
+                        <p class="project-desc">
+                            A secure, database-integrated web application designed to manage student attendance records seamlessly. Includes real-time dashboard stats, spreadsheet reports exports, and a student information management interface.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Flask</span>
+                            <span class="tech-badge">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline small-btn"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary small-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="images/project2.jpg" alt="Expense Tracker Dashboard Preview" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <h3 class="project-title">Expense Tracker</h3>
+                        <p class="project-desc">
+                            A clean and responsive frontend-only application helping users record, track, and categorize expenses over time. Equipped with visual analytics charts, search features, local storage database persistence, and category budgeting meters.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline small-btn"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary small-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section scroll-reveal" id="experience">
+        <div class="container">
+            <h2 class="section-title">Employment History</h2>
+            
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title-box">
+                        <h3 class="experience-role"><i class="fa-solid fa-briefcase text-primary"></i> Customer Support Executive</h3>
+                        <span class="experience-duration">2022 – 2026</span>
+                    </div>
+                </div>
+                <div class="experience-body">
+                    <p class="paragraph text-muted">
+                        Worked in customer support while supporting family financially. During this period, continued learning programming and built several web development projects independently. Successfully completed software testing guidelines and coordinated client communication loops.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certs-section highlight-section scroll-reveal" id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            
+            <div class="certs-grid">
+                <!-- Cert 1 -->
+                <div class="certificate-card">
+                    <div class="cert-image-container">
+                        <img src="images/certificate1.jpg" alt="Python Programming Certificate Preview" class="cert-img">
+                    </div>
+                    <div class="cert-details">
+                        <h3 class="cert-title">Python Programming</h3>
+                        <p class="cert-org"><i class="fa-solid fa-building-columns"></i> Coursera</p>
+                        <span class="cert-year"><i class="fa-solid fa-calendar-days"></i> Completed in 2025</span>
+                    </div>
+                </div>
+                
+                <!-- Cert 2 -->
+                <div class="certificate-card">
+                    <div class="cert-image-container">
+                        <img src="images/certificate2.jpg" alt="Full Stack Web Development Certificate Preview" class="cert-img">
+                    </div>
+                    <div class="cert-details">
+                        <h3 class="cert-title">Full Stack Web Development</h3>
+                        <p class="cert-org"><i class="fa-solid fa-building-columns"></i> Udemy</p>
+                        <span class="cert-year"><i class="fa-solid fa-calendar-days"></i> Completed in 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Download Callout Section -->
+    <section class="resume-cta-section scroll-reveal">
+        <div class="container resume-cta-card">
+            <div class="resume-cta-content">
+                <i class="fa-regular fa-file-pdf resume-icon-large"></i>
+                <div>
+                    <h3>Looking for my full background?</h3>
+                    <p>Get a neat PDF version of my qualifications, achievements, and technical expertise.</p>
+                </div>
+            </div>
+            <a href="images/resume.pdf" class="btn btn-primary" download="Rahul_Kumar_Resume.pdf">
+                <i class="fa-solid fa-download"></i> Download Resume
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section scroll-reveal" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            
+            <div class="contact-grid">
+                <!-- Contact Info Panel -->
+                <div class="contact-info-panel">
+                    <h3>Get in Touch</h3>
+                    <p>Have an internship opening, a project idea, or just want to chat? Reach out to me anytime!</p>
+                    
+                    <div class="info-list">
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="info-text">
+                                <span class="info-label">Email</span>
+                                <a href="mailto:rahulkumar@example.com" class="info-link">rahulkumar@example.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="info-text">
+                                <span class="info-label">Phone</span>
+                                <a href="tel:+919876543210" class="info-link">+91 98765 43210</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="info-text">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Chennai, India</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-box">
+                        <h4>Find me on:</h4>
+                        <div class="social-links">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form Panel -->
+                <div class="contact-form-panel">
+                    <form id="contact-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-name">Name <span class="required">*</span></label>
+                                <input type="text" id="form-name" class="form-control" placeholder="John Doe" required>
+                                <div class="form-error-msg" id="name-error">Please fill in your name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email">Email <span class="required">*</span></label>
+                                <input type="email" id="form-email" class="form-control" placeholder="john@example.com" required>
+                                <div class="form-error-msg" id="email-error">Please fill in a valid email.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="form-subject">Subject <span class="required">*</span></label>
+                            <input type="text" id="form-subject" class="form-control" placeholder="Hello!" required>
+                            <div class="form-error-msg" id="subject-error">Please enter a subject.</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="form-message">Message <span class="required">*</span></label>
+                            <textarea id="form-message" rows="5" class="form-control" placeholder="Write your message here..." required></textarea>
+                            <div class="form-error-msg" id="message-error">Please write your message.</div>
+                        </div>
+
+                        <div id="form-success-box" class="form-success-box">
+                            <i class="fa-solid fa-circle-check"></i> Thank you! Your message has been sent successfully.
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="copyright">&copy; <span id="current-year">2026</span> Rahul Kumar. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:rahulkumar@example.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="scroll-top-btn" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
