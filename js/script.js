@@ -1,267 +1,832 @@
 /* ==========================================================================
-   STUDENT PORTFOLIO WEBSITE - INTERACTIVITY STACK (VANILLA JAVASCRIPT)
+   STUDENT PORTFOLIO WEBSITE
+   RESPONSIVE VANILLA JAVASCRIPT
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    // 1. STICKY NAVBAR & BACK TO TOP BUTTON
-    const navbar = document.getElementById('navbar');
-    const scrollTopBtn = document.getElementById('scroll-top-btn');
-    const currentYearSpan = document.getElementById('current-year');
+    /* ======================================================================
+       1. ELEMENT REFERENCES
+       ====================================================================== */
 
-    // Dynamic Year for copyright
+    const navbar = document.getElementById("navbar");
+    const scrollTopBtn = document.getElementById("scroll-top-btn");
+    const currentYearSpan = document.getElementById("current-year");
+
+    const hamburger = document.getElementById("hamburger-btn");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll(".nav-link");
+
+
+    /* ======================================================================
+       2. CURRENT YEAR
+       ====================================================================== */
+
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    window.addEventListener('scroll', () => {
-        // Sticky Header shadow elevation
-        if (window.scrollY > 40) {
-            navbar.classList.add('sticky');
-        } else {
-            navbar.classList.remove('sticky');
+
+    /* ======================================================================
+       3. NAVBAR + BACK TO TOP
+       ====================================================================== */
+
+    function handleScroll() {
+
+        const scrollPosition = window.scrollY;
+
+        /* Sticky navbar */
+
+        if (navbar) {
+
+            if (scrollPosition > 40) {
+                navbar.classList.add("sticky");
+            } else {
+                navbar.classList.remove("sticky");
+            }
+
         }
 
-        // Back to Top Button display
-        if (window.scrollY > 500) {
-            scrollTopBtn.classList.add('active');
-        } else {
-            scrollTopBtn.classList.remove('active');
+
+        /* Back to top button */
+
+        if (scrollTopBtn) {
+
+            if (scrollPosition > 500) {
+                scrollTopBtn.classList.add("active");
+            } else {
+                scrollTopBtn.classList.remove("active");
+            }
+
         }
+
+    }
+
+    window.addEventListener("scroll", handleScroll, {
+        passive: true
     });
 
-    // Scroll to Top action
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    handleScroll();
+
+
+    /* ======================================================================
+       4. BACK TO TOP
+       ====================================================================== */
+
+    if (scrollTopBtn) {
+
+        scrollTopBtn.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
         });
-    });
+
+    }
 
 
-    // 2. MOBILE HAMBURGER MENU TOGGLE
-    const hamburger = document.getElementById('hamburger-btn');
-    const navLinks = document.getElementById('nav-links');
-    const navItems = document.querySelectorAll('.nav-link');
+    /* ======================================================================
+       5. MOBILE HAMBURGER MENU
+       ====================================================================== */
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
+    function closeMobileMenu() {
 
-    // Close menu when clicking nav item
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        });
-    });
-
-    // Close menu when clicking outside nav links
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
+        if (hamburger) {
+            hamburger.classList.remove("active");
+            hamburger.setAttribute("aria-expanded", "false");
         }
+
+        if (navLinks) {
+            navLinks.classList.remove("active");
+        }
+
+        document.body.classList.remove("menu-open");
+
+    }
+
+
+    function openMobileMenu() {
+
+        if (hamburger) {
+            hamburger.classList.add("active");
+            hamburger.setAttribute("aria-expanded", "true");
+        }
+
+        if (navLinks) {
+            navLinks.classList.add("active");
+        }
+
+        document.body.classList.add("menu-open");
+
+    }
+
+
+    if (hamburger && navLinks) {
+
+        hamburger.addEventListener("click", (event) => {
+
+            event.stopPropagation();
+
+            const isOpen =
+                navLinks.classList.contains("active");
+
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+
+        });
+
+    }
+
+
+    /* Close menu when clicking a navigation item */
+
+    navItems.forEach((item) => {
+
+        item.addEventListener("click", () => {
+
+            closeMobileMenu();
+
+        });
+
     });
 
 
-    // 3. TYPING ANIMATION (HERO SECTION)
-    const typingText = document.getElementById('typing-text');
+    /* Close menu when clicking outside */
+
+    document.addEventListener("click", (event) => {
+
+        if (!hamburger || !navLinks) {
+            return;
+        }
+
+        const clickedInsideButton =
+            hamburger.contains(event.target);
+
+        const clickedInsideMenu =
+            navLinks.contains(event.target);
+
+        if (!clickedInsideButton && !clickedInsideMenu) {
+
+            closeMobileMenu();
+
+        }
+
+    });
+
+
+    /* Close mobile menu with Escape */
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+
+            closeMobileMenu();
+
+        }
+
+    });
+
+
+    /* Close mobile menu if screen becomes desktop */
+
+    window.addEventListener("resize", () => {
+
+        if (window.innerWidth > 1024) {
+
+            closeMobileMenu();
+
+        }
+
+    });
+
+
+    /* ======================================================================
+       6. TYPING ANIMATION
+       ====================================================================== */
+
+    const typingText =
+        document.getElementById("typing-text");
+
     const titles = [
         "Aspiring Full Stack Developer",
         "Computer Science Student",
         "Coding Enthusiast"
     ];
+
     let titleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
+
     let typeSpeed = 100;
 
+
     function handleTyping() {
-        if (!typingText) return;
-        const currentTitle = titles[titleIndex];
 
-        if (isDeleting) {
-            // Delete characters
-            typingText.textContent = currentTitle.substring(0, charIndex - 1);
-            charIndex--;
-            typeSpeed = 40; // delete faster
-        } else {
-            // Write characters
-            typingText.textContent = currentTitle.substring(0, charIndex + 1);
+        if (!typingText) {
+            return;
+        }
+
+        const currentTitle =
+            titles[titleIndex];
+
+
+        /* Write */
+
+        if (!isDeleting) {
+
+            typingText.textContent =
+                currentTitle.substring(
+                    0,
+                    charIndex + 1
+                );
+
             charIndex++;
-            typeSpeed = 100;
+
+            typeSpeed = 90;
+
         }
 
-        // State changes
-        if (!isDeleting && charIndex === currentTitle.length) {
-            isDeleting = true;
-            typeSpeed = 2000; // Pause at full title
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            titleIndex = (titleIndex + 1) % titles.length;
-            typeSpeed = 400; // Pause before typing next
+
+        /* Delete */
+
+        else {
+
+            typingText.textContent =
+                currentTitle.substring(
+                    0,
+                    charIndex - 1
+                );
+
+            charIndex--;
+
+            typeSpeed = 45;
+
         }
+
+
+        /* Finished typing */
+
+        if (
+            !isDeleting &&
+            charIndex === currentTitle.length
+        ) {
+
+            isDeleting = true;
+
+            typeSpeed = 2000;
+
+        }
+
+
+        /* Finished deleting */
+
+        else if (
+            isDeleting &&
+            charIndex === 0
+        ) {
+
+            isDeleting = false;
+
+            titleIndex =
+                (titleIndex + 1) % titles.length;
+
+            typeSpeed = 500;
+
+        }
+
 
         setTimeout(handleTyping, typeSpeed);
+
     }
 
-    // Initialize typing loop
+
     if (typingText) {
-        setTimeout(handleTyping, 1000);
+
+        setTimeout(handleTyping, 800);
+
     }
 
 
-    // 4. INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
-    // Reveal animated sections
-    const scrollRevealSections = document.querySelectorAll('.scroll-reveal');
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('reveal');
-                observer.unobserve(entry.target); // Trigger only once
-            }
+    /* ======================================================================
+       7. SCROLL REVEAL
+       ====================================================================== */
+
+    const scrollRevealSections =
+        document.querySelectorAll(".scroll-reveal");
+
+
+    if ("IntersectionObserver" in window) {
+
+        const sectionObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach((entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "reveal"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
+
+
+        scrollRevealSections.forEach((section) => {
+
+            sectionObserver.observe(section);
+
         });
-    }, {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    });
 
-    scrollRevealSections.forEach(section => {
-        sectionObserver.observe(section);
-    });
+    } else {
 
-    // Fill skill progress-bars on entering viewport
-    const progressBars = document.querySelectorAll('.progress-bar-fill');
-    const skillListSection = document.querySelector('.skills-grid');
+        /* Fallback for old browsers */
 
-    const progressObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                progressBars.forEach(bar => {
-                    const percent = bar.getAttribute('data-progress');
-                    bar.style.width = percent;
-                });
-                observer.unobserve(entry.target);
-            }
+        scrollRevealSections.forEach((section) => {
+
+            section.classList.add("reveal");
+
         });
-    }, {
-        threshold: 0.1
-    });
 
-    if (skillListSection) {
-        progressObserver.observe(skillListSection);
     }
 
 
-    // 5. ACTIVE NAVBAR LINK HIGHLIGHTING
-    const sections = document.querySelectorAll('section');
-    
-    window.addEventListener('scroll', () => {
-        let currentSectionId = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 120; // Offset relative to sticky header height
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                currentSectionId = section.getAttribute('id');
+    /* ======================================================================
+       8. SKILL PROGRESS BARS
+       ====================================================================== */
+
+    const progressBars =
+        document.querySelectorAll(".progress-bar-fill");
+
+    const skillListSection =
+        document.querySelector(".skills-grid");
+
+
+    if (
+        skillListSection &&
+        "IntersectionObserver" in window
+    ) {
+
+        const progressObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach((entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            progressBars.forEach((bar) => {
+
+                                const percent =
+                                    bar.getAttribute(
+                                        "data-progress"
+                                    );
+
+                                if (percent) {
+
+                                    bar.style.width =
+                                        percent;
+
+                                }
+
+                            });
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.1
+                }
+            );
+
+
+        progressObserver.observe(
+            skillListSection
+        );
+
+    } else {
+
+        progressBars.forEach((bar) => {
+
+            const percent =
+                bar.getAttribute(
+                    "data-progress"
+                );
+
+            if (percent) {
+                bar.style.width = percent;
             }
+
         });
 
-        navItems.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSectionId}`) {
-                link.classList.add('active');
+    }
+
+
+    /* ======================================================================
+       9. ACTIVE NAVIGATION
+       ====================================================================== */
+
+    const sections =
+        document.querySelectorAll("section[id]");
+
+
+    function updateActiveNavigation() {
+
+        let currentSectionId = "";
+
+        const scrollPosition =
+            window.scrollY + 150;
+
+
+        sections.forEach((section) => {
+
+            const sectionTop =
+                section.offsetTop;
+
+            const sectionBottom =
+                sectionTop +
+                section.offsetHeight;
+
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionBottom
+            ) {
+
+                currentSectionId =
+                    section.getAttribute("id");
+
             }
+
         });
-    });
 
 
-    // 6. CONTACT FORM SUBMISSION & CLIENT-SIDE VALIDATION
-    const contactForm = document.getElementById('contact-form');
-    const nameInput = document.getElementById('form-name');
-    const emailInput = document.getElementById('form-email');
-    const subjectInput = document.getElementById('form-subject');
-    const messageInput = document.getElementById('form-message');
-    const successBox = document.getElementById('form-success-box');
+        navItems.forEach((link) => {
 
-    // Email regex validation helper
+            link.classList.remove("active");
+
+            const href =
+                link.getAttribute("href");
+
+            if (
+                href === `#${currentSectionId}`
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateActiveNavigation,
+        {
+            passive: true
+        }
+    );
+
+    updateActiveNavigation();
+
+
+    /* ======================================================================
+       10. CONTACT FORM
+       ====================================================================== */
+
+    const contactForm =
+        document.getElementById("contact-form");
+
+    const nameInput =
+        document.getElementById("form-name");
+
+    const emailInput =
+        document.getElementById("form-email");
+
+    const subjectInput =
+        document.getElementById("form-subject");
+
+    const messageInput =
+        document.getElementById("form-message");
+
+    const successBox =
+        document.getElementById("form-success-box");
+
+
+    /* Email validation */
+
     function isValidEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const regex =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         return regex.test(email);
+
     }
 
-    // Input error handling functions
-    function showError(input, errorElementId) {
-        input.classList.add('invalid');
-        document.getElementById(errorElementId).style.display = 'block';
+
+    /* Show error */
+
+    function showError(
+        input,
+        errorElementId
+    ) {
+
+        if (!input) {
+            return;
+        }
+
+        input.classList.add("invalid");
+
+        const errorElement =
+            document.getElementById(
+                errorElementId
+            );
+
+        if (errorElement) {
+
+            errorElement.style.display =
+                "block";
+
+        }
+
     }
 
-    function removeError(input, errorElementId) {
-        input.classList.remove('invalid');
-        document.getElementById(errorElementId).style.display = 'none';
+
+    /* Remove error */
+
+    function removeError(
+        input,
+        errorElementId
+    ) {
+
+        if (!input) {
+            return;
+        }
+
+        input.classList.remove("invalid");
+
+        const errorElement =
+            document.getElementById(
+                errorElementId
+            );
+
+        if (errorElement) {
+
+            errorElement.style.display =
+                "none";
+
+        }
+
     }
 
-    // Add inputs change listener for immediate error removals
-    nameInput?.addEventListener('input', () => removeError(nameInput, 'name-error'));
-    emailInput?.addEventListener('input', () => removeError(emailInput, 'email-error'));
-    subjectInput?.addEventListener('input', () => removeError(subjectInput, 'subject-error'));
-    messageInput?.addEventListener('input', () => removeError(messageInput, 'message-error'));
 
-    contactForm?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let isFormValid = true;
+    /* Live validation */
 
-        // Reset errors
-        successBox.style.display = 'none';
-
-        // 1. Validate Name
-        if (nameInput.value.trim() === '') {
-            showError(nameInput, 'name-error');
-            isFormValid = false;
-        } else {
-            removeError(nameInput, 'name-error');
+    nameInput?.addEventListener(
+        "input",
+        () => {
+            removeError(
+                nameInput,
+                "name-error"
+            );
         }
+    );
 
-        // 2. Validate Email
-        if (emailInput.value.trim() === '' || !isValidEmail(emailInput.value.trim())) {
-            showError(emailInput, 'email-error');
-            isFormValid = false;
-        } else {
-            removeError(emailInput, 'email-error');
+
+    emailInput?.addEventListener(
+        "input",
+        () => {
+            removeError(
+                emailInput,
+                "email-error"
+            );
         }
+    );
 
-        // 3. Validate Subject
-        if (subjectInput.value.trim() === '') {
-            showError(subjectInput, 'subject-error');
-            isFormValid = false;
-        } else {
-            removeError(subjectInput, 'subject-error');
+
+    subjectInput?.addEventListener(
+        "input",
+        () => {
+            removeError(
+                subjectInput,
+                "subject-error"
+            );
         }
+    );
 
-        // 4. Validate Message
-        if (messageInput.value.trim() === '') {
-            showError(messageInput, 'message-error');
-            isFormValid = false;
-        } else {
-            removeError(messageInput, 'message-error');
+
+    messageInput?.addEventListener(
+        "input",
+        () => {
+            removeError(
+                messageInput,
+                "message-error"
+            );
         }
+    );
 
-        // If form valid, mock submit
-        if (isFormValid) {
-            successBox.style.display = 'flex';
-            
-            // Console log details matching requirements
-            console.log("Form Submitted Successfully:", {
-                name: nameInput.value,
-                email: emailInput.value,
-                subject: subjectInput.value,
-                message: messageInput.value
-            });
 
-            // Clear inputs
-            contactForm.reset();
+    /* Form submission */
+
+    contactForm?.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+            let isFormValid = true;
+
+
+            if (successBox) {
+
+                successBox.style.display =
+                    "none";
+
+            }
+
+
+            /* Name */
+
+            if (
+                !nameInput ||
+                nameInput.value.trim() === ""
+            ) {
+
+                showError(
+                    nameInput,
+                    "name-error"
+                );
+
+                isFormValid = false;
+
+            } else {
+
+                removeError(
+                    nameInput,
+                    "name-error"
+                );
+
+            }
+
+
+            /* Email */
+
+            const emailValue =
+                emailInput
+                    ? emailInput.value.trim()
+                    : "";
+
+
+            if (
+                !emailValue ||
+                !isValidEmail(emailValue)
+            ) {
+
+                showError(
+                    emailInput,
+                    "email-error"
+                );
+
+                isFormValid = false;
+
+            } else {
+
+                removeError(
+                    emailInput,
+                    "email-error"
+                );
+
+            }
+
+
+            /* Subject */
+
+            if (
+                !subjectInput ||
+                subjectInput.value.trim() === ""
+            ) {
+
+                showError(
+                    subjectInput,
+                    "subject-error"
+                );
+
+                isFormValid = false;
+
+            } else {
+
+                removeError(
+                    subjectInput,
+                    "subject-error"
+                );
+
+            }
+
+
+            /* Message */
+
+            if (
+                !messageInput ||
+                messageInput.value.trim() === ""
+            ) {
+
+                showError(
+                    messageInput,
+                    "message-error"
+                );
+
+                isFormValid = false;
+
+            } else {
+
+                removeError(
+                    messageInput,
+                    "message-error"
+                );
+
+            }
+
+
+            /* Successful validation */
+
+            if (isFormValid) {
+
+                if (successBox) {
+
+                    successBox.style.display =
+                        "flex";
+
+                }
+
+
+                console.log(
+                    "Form Submitted Successfully:",
+                    {
+                        name:
+                            nameInput.value.trim(),
+
+                        email:
+                            emailInput.value.trim(),
+
+                        subject:
+                            subjectInput.value.trim(),
+
+                        message:
+                            messageInput.value.trim()
+                    }
+                );
+
+
+                contactForm.reset();
+
+            }
+
         }
-    });
+    );
+
+
+    /* ======================================================================
+       11. PREVENT ANCHOR JUMP WHEN MENU IS OPEN
+       ====================================================================== */
+
+    window.addEventListener(
+        "orientationchange",
+        () => {
+
+            setTimeout(() => {
+
+                updateActiveNavigation();
+
+            }, 300);
+
+        }
+    );
+
 });
